@@ -1,8 +1,11 @@
 package com.jaigoludev.hp.realmdemo.Config;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+@IgnoreExtraProperties
 public class DetailGetSet extends RealmObject{
 
     @PrimaryKey
