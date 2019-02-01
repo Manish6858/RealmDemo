@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // store app title to 'app_title' node
         database.getReference("app_title").setValue("User Detail");
 
+        // In this file i want to insert data in firebase database
 
 
         findViewById(R.id.submit).setOnClickListener(view ->{
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 if(name.getText().toString().equals("")|| age.getText().toString().equals("")|| contact.getText().toString().equals("")||email.getText().toString().equals("")){
                     Toast.makeText(MainActivity.this, "Entry empty", Toast.LENGTH_SHORT).show();
                 } else {
+                    // this methos inset the data in database of firebase
                     insertFirebaseDatabase(detailGetSet);
                     realm.beginTransaction();
                     realm.copyToRealm(detailGetSet);
@@ -83,8 +85,21 @@ public class MainActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(userId)) {
             userId = databaseReference.push().getKey();
         }
-        databaseReference.child(userId).setValue(detailGetSet);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*databaseReference.child(userId).setValue(detailGetSet);
         addUserChangeListener();
+        databaseReference.setValue(detailGetSet);*/
 
     }
 
